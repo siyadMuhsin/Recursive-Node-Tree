@@ -32,6 +32,7 @@ const Home: React.FC = () => {
   }, []);
 
   const handleAdd = async (parentId: string | null, name: string) => {
+    setLoading(true)
     try {
       const { newNode } = await addNode({ name, parentId });
       toast.success("Node added successfully!");
@@ -57,10 +58,13 @@ const Home: React.FC = () => {
       const errMessage = error instanceof Error ? error.message : String(error);
       console.error(errMessage);
       toast.error(errMessage || "Failed to add node");
+    }finally{
+        setLoading(false)
     }
   };
 
   const handleDelete = async (id: string) => {
+    setLoading(true)
     try {
       await deleteNode(id);
       toast.success("Node deleted successfully!");
@@ -78,6 +82,8 @@ const Home: React.FC = () => {
       const errMessage = error instanceof Error ? error.message : String(error);
       console.error(errMessage);
       toast.error(errMessage || "Failed to delete node");
+    }finally{
+        setLoading(false)
     }
   };
 
