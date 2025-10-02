@@ -11,9 +11,10 @@ export class NodeService implements INodeService{
 
     ){}
 
-    async addNode(name: string, parantId?: string): Promise<{ ok: boolean; msg?: string; }> {
+    async addNode(name: string, parentId?: string): Promise<{ ok: boolean; msg?: string; }> {
+console.log(parentId);
 
-        const newNode= await this._nodeRepository.create(name,parantId)
+        const newNode= await this._nodeRepository.create(name,parentId)
         return {ok:true,msg:"Newnode created Successfully"}
         
     }
@@ -21,7 +22,7 @@ export class NodeService implements INodeService{
     async getTree(): Promise<{ ok: boolean; nodes?: any[]; }> {
         const nodes=await this._nodeRepository.findAll();
         const buildTree=(parantId:string | null =null):any[]=>{
-            return nodes.filter(node=>String(node.parantId)==String(parantId))
+            return nodes.filter(node=>String(node.parentId)==String(parantId))
             .map(node=>({
                 ...node.toObject(),
                 children:buildTree(node._id.toString())

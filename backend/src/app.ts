@@ -6,10 +6,15 @@ import nodeRouter from "./routes/node.routes";
 import cors from 'cors'
 const app=express()
 
-app.use(cors())
 app.use(express.json())
 dotenv.config()
+const clientApi = process.env.CLIENT_API
+console.log(clientApi);
 
+const corsOptions: cors.CorsOptions = {
+    origin: clientApi, 
+};
+app.use(cors(corsOptions))
 
 connectDB()
 

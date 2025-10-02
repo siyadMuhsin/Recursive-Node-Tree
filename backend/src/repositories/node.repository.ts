@@ -3,8 +3,8 @@ import { INodeRepository } from "../interfaces/repositories/INodeRepository";
 import { NodeModel } from "../models/node.model";
 
 export class NodeRepository implements INodeRepository{
-    async create(name: string, parantId?: string | null): Promise<INode> {
-        const newNode=new NodeModel({name,parantId})
+    async create(name: string, parentId?: string | null): Promise<INode> {
+        const newNode=new NodeModel({name,parentId})
         return await newNode.save()
     }
     async findAll(): Promise<INode[]> {

@@ -11,8 +11,10 @@ export class NodeController implements INodeController {
 
   async addNode(req: Request, res: Response): Promise<void> {
     try {
-      const { name, parantId } = req.body;
-      const node = await this._nodeService.addNode(name, parantId);
+      const { name, parentId } = req.body;
+      console.log(name,parentId);
+      
+      const node = await this._nodeService.addNode(name, parentId);
       this.sendResponse(res, node, HttpStatus.CREATED);
     } catch (error) {
       const err = error as Error;
@@ -24,6 +26,8 @@ export class NodeController implements INodeController {
     }
   }
   async getTree(req: Request, res: Response): Promise<void> {
+    console.log('get in tree');
+    
     try {
       const tree = await this._nodeService.getTree();
       this.sendResponse(res, tree, HttpStatus.OK);
