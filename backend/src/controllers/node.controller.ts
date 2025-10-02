@@ -12,8 +12,6 @@ export class NodeController implements INodeController {
   async addNode(req: Request, res: Response): Promise<void> {
     try {
       const { name, parentId } = req.body;
-      console.log(name,parentId);
-      
       const node = await this._nodeService.addNode(name, parentId);
       this.sendResponse(res, node, HttpStatus.CREATED);
     } catch (error) {
@@ -26,8 +24,6 @@ export class NodeController implements INodeController {
     }
   }
   async getTree(req: Request, res: Response): Promise<void> {
-    console.log('get in tree');
-    
     try {
       const tree = await this._nodeService.getTree();
       this.sendResponse(res, tree, HttpStatus.OK);
@@ -43,7 +39,7 @@ export class NodeController implements INodeController {
   async deleteNode(req: Request, res: Response): Promise<void> {
     try {
       const id = req.params.id;
-      if (!id) {
+      if (!id.trim()) {
         this.sendResponse(
           res,
           { ok: false, msg: "Id required" },
@@ -53,7 +49,10 @@ export class NodeController implements INodeController {
       }
       await this._nodeService.deleteNode(id);
       this.sendResponse(res, { ok: true, msg: "Node Deleted" }, HttpStatus.OK);
-    } catch (error) {}
+    } catch (error) {
+         const err = error as Error;
+  this.sendResponse(res, { ok: false, msg: err.message || "Error deleting node" }, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   private sendResponse(res: Response, data: any, status: HttpStatus): void {

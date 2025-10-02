@@ -10,9 +10,7 @@ const fetchTree=async ()=>{
         return response.data
         
     } catch (error:AxiosError) {
-        console.log(error,'erererere');
-
-        throw new Error(error?.response?.data?.message)
+        throw new Error(error?.response?.data?.msg)
     }
 }
 
@@ -21,7 +19,7 @@ const addNode=async (data:Partial<INode>)=>{
         const response=await API.post('/',data)
         return response.data
     } catch (error:AxiosError) {
-        throw new Error(error?.response?.data?.message)
+        throw new Error(error?.response?.data?.msg)
     }
 }
 const deleteNode=async(id:string)=>{
@@ -29,9 +27,7 @@ const deleteNode=async(id:string)=>{
         const response=await API.delete(`/${id}`)
         return response.data
     } catch (error:AxiosError) {
-        console.log(error);
-        
-        throw new Error(error?.response?.data?.message)
+        throw new Error(error?.response?.data?.msg)
     }
 }
 export {

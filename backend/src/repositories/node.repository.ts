@@ -1,3 +1,4 @@
+import { FilterQuery } from "mongoose";
 import { INode } from "../interfaces/models/INode";
 import { INodeRepository } from "../interfaces/repositories/INodeRepository";
 import { NodeModel } from "../models/node.model";
@@ -11,10 +12,13 @@ export class NodeRepository implements INodeRepository{
         return await NodeModel.find()
         
     }
-    async findChildren(parantId: string): Promise<INode[]> {
-        return await NodeModel.find({parantId})
+    async findChildren(parentId: string): Promise<INode[]> {
+        return await NodeModel.find({parentId})
     }
     async delete(id: string): Promise<void> {
          await NodeModel.findByIdAndDelete(id)
+    }
+    async findOne(data: FilterQuery<INode>): Promise<INode[] | null> {
+        return await NodeModel.findOne(data)
     }
 }
