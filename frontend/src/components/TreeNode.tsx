@@ -19,7 +19,7 @@ const TreeNode: React.FC<NodeProps> = ({ node, onAdd, onDelete }) => {
       await onAdd(node._id, newNodeName);
       setNewNodeName("");
       setShowAddInput(false);
-      setExpanded(true); // Auto-expand to show the new child
+      setExpanded(true); 
     } finally {
       setLoadingAdd(false);
     }
