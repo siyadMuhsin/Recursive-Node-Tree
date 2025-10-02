@@ -65,6 +65,10 @@ The application allows users to create, view, and delete nodes in a **recursive 
 
 ---
 
+Screenshorts
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/94a8db3a-3c05-4ece-a543-f82dfaa3d7bd" />
+
+
 
 🌐 Deployment
 Frontend: Vercel (npm run build → dist/)
